@@ -1,6 +1,3 @@
-# Dependências
-node_modules/
-
 # Configurações locais
 .env
 .vscode/
