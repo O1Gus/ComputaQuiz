@@ -1,0 +1,9 @@
+# Ignorar logs
+*.log
+
+tools/ngrok.exe
+
+
+# Ignorar cache
+.DS_Store
+Thumbs.db

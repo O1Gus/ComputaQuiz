@@ -1,0 +1,8 @@
+WALLET_LOCATION = 
+  (SOURCE = 
+    (METHOD = file) 
+    (METHOD_DATA = 
+      (DIRECTORY = C:\Users\gusta\OneDrive\Desktop\ComputaQuiz-main\config)
+    )
+  )
+SSL_SERVER_DN_MATCH = yes

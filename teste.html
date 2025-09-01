@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Som ao apertar Enter</title>
+</head>
+<body>
+  <h1>Pressione Enter para tocar o som 🎵</h1>
+
+  <script>
+    // Cria objeto de áudio com o som da pasta
+    const somEnter = new Audio("./sons/plim1.mp3");
+
+    // Detecta tecla pressionada
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+        somEnter.play();
+      }
+    });
+  </script>
+</body>
+</html>

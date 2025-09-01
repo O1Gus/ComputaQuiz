@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Fliperama</title>
+  <link rel="stylesheet" href="public/css/telagameover.css" />
+</head>
+<body>
+  <div id="game">
+    <h1>Quiz Estilo Fliperama</h1>
+    <button onclick="simularFimDeJogo()">Simular Game Over</button>
+  </div>
+
+  <div id="game-over" class="hidden">
+    <div class="scanlines"></div>
+    <h1>GAME OVER</h1>
+    <p>Sua pontuação: <span id="final-score">0</span></p>
+    <button onclick="reiniciarJogo()">Tentar Novamente</button>
+  </div>
+
+  <script src="public/js/telagameover.js"></script>
+</body>
+</html>
