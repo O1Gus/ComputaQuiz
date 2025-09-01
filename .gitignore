@@ -1,9 +1,21 @@
-# Ignorar logs
-*.log
+# Dependências
+node_modules/
 
+# Configurações locais
+.env
+.vscode/
+
+# Executáveis
 tools/ngrok.exe
 
+# Logs
+*.log
 
-# Ignorar cache
+# Sistema
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Build/cache
+dist/
+build/
