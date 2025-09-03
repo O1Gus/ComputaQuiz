@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
       case "ArrowRight":
         // Vai para o próximo select
         if (currentIndex < selects.length - 1) {
+          const somEnter = new Audio("./sons/plim1.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play()
           currentIndex++;
           selects[currentIndex].focus();
         }
@@ -23,7 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       case "ArrowLeft":
         // Volta para o select anterior
+        
         if (currentIndex > 0) {
+          const somEnter = new Audio("./sons/plim2.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentIndex--;
           selects[currentIndex].focus();
         }
@@ -32,6 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
       case "ArrowUp":
         // Seleciona a opção anterior
         if (currentSelect.selectedIndex > 0) {
+          const somEnter = new Audio("./sons/plim1.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentSelect.selectedIndex--;
         }
         break;
@@ -39,18 +49,23 @@ document.addEventListener("DOMContentLoaded", () => {
       case "ArrowDown":
         // Seleciona a próxima opção
         if (currentSelect.selectedIndex < currentSelect.options.length - 1) {
+          const somEnter = new Audio("./sons/plim4.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentSelect.selectedIndex++;
         }
         break;  
 
       case "Enter":
-    const overlay = document.getElementById("overlay");
 
-    // Verifica se a tela de aviso está visível
-    if (overlay.style.display === "flex") {
-        overlay.style.display = "none";
-        break;
-    }
+        // Verifica se a tela de aviso está visível
+        if (overlay.style.display === "flex") {
+            const somEnter = new Audio("./sons/plim3.mp3");
+            somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+            somEnter.play();
+            overlay.style.display = "none";
+            break;
+        }
 
     // Coleta os valores dos selects
     let caractere1 = document.getElementById("caractere1").value;
@@ -78,9 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(`Erro ao salvar nickname: ${data.message}`);
         }
         } catch (error) {
+            const somEnter = new Audio("./sons/plim3.mp3");
+            somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+            somEnter.play();
             console.error('Erro de conexão:', error);
             alert('Não foi possível conectar ao servidor. Tente novamente.');
         }
+        window.location.href = "/perguntas.html";
         break;
        
         

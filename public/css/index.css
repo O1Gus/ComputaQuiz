@@ -131,7 +131,7 @@ body{
   cursor: none;
   transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.3s;
   transform: translateY(30px);
-  
+
 }
 
 .balao5 {
@@ -211,7 +211,7 @@ h2 {
     outline: none;
     text-shadow: 0 0 0px rgb(0, 255, 0);
     transition: opacity 0.1s ease-in-out;
-        
+
 }
 
 h2::before {
@@ -220,7 +220,7 @@ h2::before {
     pointer-events: none;
     cursor: none;
     transition: opacity 0.1s ease-in-out;
-    
+
 }
 
 h2:focus::before {
@@ -248,7 +248,7 @@ h2:focus {
     cursor: none;
     animation: scaleAnimation 2s infinite;
     transition: opacity 0.1s ease-in-out;
-    
+
 }
 
 @keyframes scaleAnimation {
@@ -326,8 +326,3 @@ h2:focus {
     50% { opacity: 1; }
     75% { opacity: 0; }
 }
-
-
-
-
-
