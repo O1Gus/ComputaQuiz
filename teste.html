@@ -2,22 +2,62 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Som ao apertar Enter</title>
+  <title>Contador Aleatório</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+      flex-direction: column;
+    }
+
+    #contador {
+      font-size: 50px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Pressione Enter para tocar o som 🎵</h1>
+  <div id="contador">0</div>
+  <button onclick="incrementar()">Adicionar</button>
 
   <script>
-    // Cria objeto de áudio com o som da pasta
-    const somEnter = new Audio("./sons/plim1.mp3");
+    let valor = 0;
 
-    // Detecta tecla pressionada
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
-        somEnter.play();
+    function incrementar() {
+      // gera número aleatório entre 100 e 200
+      let incremento = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+
+      valor += incremento;
+
+      // se passar de 1.000.000, zera
+      if (valor >= 1000000) {
+        valor = 0;
       }
-    });
+
+      document.getElementById("contador").textContent = valor;
+    }
   </script>
 </body>
 </html>

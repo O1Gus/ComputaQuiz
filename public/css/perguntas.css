@@ -47,6 +47,31 @@ body{
     margin-top: 20px;
 }
 
+.boxScore {
+    background-color: none;
+    width: 20%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    padding: none;
+    border-radius: 10px;
+}
+
+.boxScore h1 {
+    font-size: 24px;
+}
+
+.boxScore h3 {
+    font-size: 28px;
+    color: white;
+    font-family: "Pixelify Sans", sans-serif;
+    margin-top: 0px;
+}
+
 
 .coracao {
     max-height: 70%; /* garante que caibam na altura da div */

@@ -93,11 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(`Erro ao salvar nickname: ${data.message}`);
         }
         } catch (error) {
-            const somEnter = new Audio("./sons/plim3.mp3");
-            somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
-            somEnter.play();
             console.error('Erro de conexão:', error);
             alert('Não foi possível conectar ao servidor. Tente novamente.');
+      
         }
         window.location.href = "/perguntas.html";
         break;
