@@ -15,6 +15,9 @@ let timer;
 
 window.onload = () => {
     document.activeElement.blur();
+    const somEnter = new Audio("./sons/8 Bit Video Game - 18.mp3");
+    somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+    somEnter.play();
 };
 
 

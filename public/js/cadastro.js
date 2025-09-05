@@ -123,10 +123,18 @@ document.addEventListener("DOMContentLoaded", () => {
 let contadorCliques = 0;
 document.addEventListener("click", () => {
     contadorCliques++;
+    const balaos = Array.from(document.querySelectorAll(".container img"));
+    balaos.forEach(b => { b.style.opacity = "0"; b.style.transform = "translateY(0)"; });
+    const somEnter = new Audio("./sons/8 Bit Video Game - 11.mp3");
+    somEnter.currentTime = 0;
+    somEnter.play();
 
     if (contadorCliques === 3) {
-      const overlay = document.getElementById("overlay");
-      overlay.style.display = "flex";
+        const somEnter = new Audio("./sons/8 Bit Video Game - 10.mp3");
+        somEnter.currentTime = 0;
+        somEnter.play();
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "flex";
       
       document.addEventListener("keydown", async (e) => {
         if (e.key === "Enter" && overlay.style.display === "flex") {

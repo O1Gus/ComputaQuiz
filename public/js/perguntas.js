@@ -751,6 +751,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const correta = q.correta;
 
     if (parseInt(indexEscolhido) !== correta) {
+      const somEnter = new Audio("./sons/8 Bit Video Game - 17.mp3");
+      somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+      somEnter.play();
       vidas--;
       botoes[currentIndex].classList.add("btn-errado");
       botoes[currentIndex].disabled = true;
@@ -761,7 +764,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("vida3").classList.add("piscar-sumir");
 
         setTimeout(() => {
-          alert("Suas vidas acabaram! O quiz reinicia 🚀");
           let valor = score
           localStorage.setItem("Score", valor);
           window.location.href = "./telagameover.html";
@@ -781,6 +783,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     perguntaAtual++;
     if (perguntaAtual < selecionadas.length) {
+      const somEnter = new Audio("./sons/plim5.mp3");
+      somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+      somEnter.play();
       mostrarPergunta();
     } else {
       alert(`Parabéns, você acertou todas as ${selecionadas.length} perguntas! 🌌`);
@@ -796,29 +801,42 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (e.key) {
       case "ArrowRight":
         if ((currentIndex % 2) < 1 && currentIndex + 1 < botoes.length) {
+          const somEnter = new Audio("./sons/plim4.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentIndex++;
           botoes[currentIndex].focus();
         }
         break;
       case "ArrowLeft":
         if ((currentIndex % 2) > 0) {
+          const somEnter = new Audio("./sons/plim2.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentIndex--;
           botoes[currentIndex].focus();
         }
         break;
       case "ArrowUp":
         if (currentIndex - 2 >= 0) {
+          const somEnter = new Audio("./sons/plim4.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentIndex -= 2;
           botoes[currentIndex].focus();
         }
         break;
       case "ArrowDown":
         if (currentIndex + 2 < botoes.length) {
+          const somEnter = new Audio("./sons/plim1.mp3");
+          somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+          somEnter.play();
           currentIndex += 2;
           botoes[currentIndex].focus();
         }
         break;
       case "Enter":
+        
         verificarResposta(botoes[currentIndex].dataset.index);
         break;
     }
@@ -831,17 +849,28 @@ document.addEventListener("DOMContentLoaded", () => {
 // Easter egg de 3 cliques
 let contadorCliques = 0;
 document.addEventListener("click", () => {
-  contadorCliques++;
-  if (contadorCliques === 3) {
-    const overlay = document.getElementById("overlay");
-    overlay.style.display = "flex";
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && overlay.style.display === "flex") {
-        overlay.style.display = "none";
-      }
-    });
-    contadorCliques = 0;
-  }
+    contadorCliques++;
+    const balaos = Array.from(document.querySelectorAll(".container img"));
+    balaos.forEach(b => { b.style.opacity = "0"; b.style.transform = "translateY(0)"; });
+    const somEnter = new Audio("./sons/8 Bit Video Game - 11.mp3");
+    somEnter.currentTime = 0;
+    somEnter.play();
+
+    if (contadorCliques === 3) {
+        const somEnter = new Audio("./sons/8 Bit Video Game - 10.mp3");
+        somEnter.currentTime = 0;
+        somEnter.play();
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "flex";
+      
+      document.addEventListener("keydown", async (e) => {
+        if (e.key === "Enter" && overlay.style.display === "flex") {
+          overlay.style.display = "none";
+        }
+      });
+     
+      contadorCliques = 0;
+    }
 });
 
 const valor = localStorage.getItem("nickname");
