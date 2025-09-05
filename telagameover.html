@@ -1,24 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz Fliperama</title>
-  <link rel="stylesheet" href="public/css/telagameover.css" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="public/css/telagameover.css">
+  <link rel="icon" href="./imagens/desktop.png" type="imagens/png"> 
+  <title>ComputaQuiz</title>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Nosso JS -->
+  <script src="public/js/telagameover.js" defer></script>
+  
 </head>
 <body>
-  <div id="game">
-    <h1>Quiz Estilo Fliperama</h1>
-    <button onclick="simularFimDeJogo()">Simular Game Over</button>
-  </div>
 
-  <div id="game-over" class="hidden">
-    <div class="scanlines"></div>
-    <h1>GAME OVER</h1>
-    <p>Sua pontuação: <span id="final-score">0</span></p>
-    <button onclick="reiniciarJogo()">Tentar Novamente</button>
+  <div class="overlay" id="overlay">
+        <div class="alert-box">
+        <!-- usa imagem da sua pasta -->
+            <img id="alertImage" src="public/imagens/boxAviso.gif" alt="Aviso Importante">
+        </div>
   </div>
-
-  <script src="public/js/telagameover.js"></script>
+  <div class="textureBox"></div>
+  <div class="container">
+    <h3>GAME</h3>
+    <H4>OVER</H4>
+    <p id="resultado"></p>
+  </div>
+  <h1 tabindex="0"></h1>
+  <h2 tabindex="0" id="selecao"></h2>
 </body>
 </html>

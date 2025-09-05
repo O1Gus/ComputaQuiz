@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Página 2</title>
+</head>
+<body>
+  <h1 id="resultado"></h1>
+
+  <script>
+    // Recupera o valor armazenado
+    const valor = localStorage.getItem("valorDigitado");
+
+    // Mostra dentro da H1
+    document.getElementById("resultado").textContent = "Pontuação" & valor;
+  </script>
+</body>
+</html>

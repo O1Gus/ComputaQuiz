@@ -1,3 +1,4 @@
+
 window.onload = () => {
   document.activeElement.blur();
 };
@@ -758,7 +759,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
           alert("Suas vidas acabaram! O quiz reinicia 🚀");
-          iniciarQuiz();
+          let valor = score
+          localStorage.setItem("Score", valor);
+          window.location.href = "./telagameover.html";
+          //iniciarQuiz();
         }, 1000);
       } else if (vidas === 2) {
         document.getElementById("vida3").classList.add("piscar-sumir");
@@ -777,7 +781,10 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarPergunta();
     } else {
       alert(`Parabéns, você acertou todas as ${selecionadas.length} perguntas! 🌌`);
-      iniciarQuiz();
+      let valor = score
+      localStorage.setItem("Score", valor);
+      window.location.href = "./telagameover.html";
+      //iniciarQuiz();
     }
   }
 
