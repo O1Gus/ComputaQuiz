@@ -6,6 +6,7 @@ let contadorCliques = 0;
 let vidaExtra = false;
 let elementos = [];
 let indexAtual = 0;
+let timer;
 
 window.onload = () => {
     document.activeElement.blur();
@@ -122,12 +123,25 @@ document.addEventListener("DOMContentLoaded", () => {
 // -----------------------
 document.addEventListener("click", () => {
     contadorCliques++;
-    // Limpa os balões ao clicar
     const balaos = Array.from(document.querySelectorAll(".container img"));
     balaos.forEach(b => { b.style.opacity = "0"; b.style.transform = "translateY(0)"; });
+    const somEnter = new Audio("./sons/8 Bit Video Game - 11.mp3");
+    somEnter.currentTime = 0;
+    somEnter.play();
 
-    if (contadorCliques === 5) {
-        alert("Você clicou 5 vezes!");
-        contadorCliques = 0;
+    if (contadorCliques === 3) {
+        const somEnter = new Audio("./sons/8 Bit Video Game - 10.mp3");
+        somEnter.currentTime = 0;
+        somEnter.play();
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "flex";
+      
+      document.addEventListener("keydown", async (e) => {
+        if (e.key === "Enter" && overlay.style.display === "flex") {
+          overlay.style.display = "none";
+        }
+      });
+     
+      contadorCliques = 0;
     }
 });
