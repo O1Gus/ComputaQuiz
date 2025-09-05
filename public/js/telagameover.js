@@ -5,6 +5,8 @@
 
 const valor = localStorage.getItem("Score");
 document.getElementById("resultado").textContent = `Pontuação ${valor}`;
+const nickname = localStorage.getItem("nickname");
+document.getElementById("nick").textContent = `${nickname}`;
 
 let contadorCliques = 0;
 let elementos = [];

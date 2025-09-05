@@ -3,6 +3,8 @@ window.onload = () => {
   document.activeElement.blur();
 };
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const perguntaEl = document.querySelector("h2");
   const botoes = Array.from(document.querySelectorAll(".boxRespostas button"));
@@ -701,6 +703,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function iniciarQuiz() {
+
     perguntaAtual = 0;
     selecionadas = [];
     vidas = 3;
@@ -840,3 +843,6 @@ document.addEventListener("click", () => {
     contadorCliques = 0;
   }
 });
+
+const valor = localStorage.getItem("nickname");
+document.getElementById("nick").textContent = `${valor}`;

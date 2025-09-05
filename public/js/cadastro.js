@@ -74,6 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Concatena os caracteres para formar o nickname
     const nickname = caractere1 + caractere2 + caractere3;
+    let valor = nickname
+    localStorage.setItem("nickname", valor);
     
     // **AQUI ESTÁ A CHAVE: Enviando o nickname para o back-end**
     try {
