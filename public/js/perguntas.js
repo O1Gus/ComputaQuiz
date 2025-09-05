@@ -836,9 +836,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         break;
       case "Enter":
+        if (overlay.style.display === "flex") {
+            const somEnter = new Audio("./sons/plim3.mp3");
+            somEnter.currentTime = 0; // reinicia o som caso já esteja tocando
+            somEnter.play();
+            overlay.style.display = "none";
+            break;
+        }else{
+          verificarResposta(botoes[currentIndex].dataset.index);
+          break;
+
+        }
         
-        verificarResposta(botoes[currentIndex].dataset.index);
-        break;
+        
     }
     e.preventDefault();
   });

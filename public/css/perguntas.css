@@ -15,9 +15,8 @@ body{
     flex-direction: column;
     height: 100vh;
     width: 100%;
-    pointer-events: none; 
+    /*pointer-events: none; */
     cursor: none;
-    cursor: not-allowed;
 }
 
 .textureBox{
