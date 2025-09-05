@@ -16,7 +16,8 @@ window.onload = () => {
 // Função que abre a tela login do Google
 // -----------------------
 function abrirLoginGoogle() {
-    window.location.href = "/auth/google";
+    //window.location.href = "/auth/google";
+    window.location.href = "/cadastro.html";
 }
 
 // -----------------------
