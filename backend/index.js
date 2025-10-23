@@ -52,11 +52,12 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (google_id, done) => {
   try {
     const r = await db.query(
-      "SELECT id_usuario, google_id, nickname FROM usuarios WHERE google_id = :google_id",
-      { google_id }
+      "SELECT id_usuario, google_id, nickname FROM usuarios WHERE google_id = ?",
+      [google_id]
     );
-    if (!r.rows[0]) return done(null, null);
-    const u = r.rows[0];
+    if (!r[0]) return done(null, null);
+    const u = r[0];
+
     // devolve já em minúsculas
     done(null, { id_usuario: u.ID_USUARIO, google_id: u.GOOGLE_ID, nickname: u.NICKNAME });
   } catch (e) {
@@ -92,14 +93,13 @@ passport.use(new GoogleStrategy(
 
         await db.query(
           `INSERT INTO usuarios (google_id, email, nome_completo, nickname)
-           VALUES (:google_id, :email, :nome_completo, :nickname_temp)`,
-          { google_id, email, nome_completo, nickname_temp },
-          { autoCommit: true } // <<<< COMMIT
+          VALUES (?, ?, ?, ?)`,
+          [google_id, email, nome_completo, nickname_temp]
         );
 
         const inserted = await db.query(
-          `SELECT id_usuario, google_id, nickname FROM usuarios WHERE google_id = :google_id`,
-          { google_id }
+          `SELECT id_usuario, google_id, nickname FROM usuarios WHERE google_id = ?`,
+          [google_id]
         );
 
         const r = inserted.rows[0];
@@ -135,8 +135,8 @@ app.get("/auth/google/callback",
       // Atualiza nickname para 'UNQ' se não existir
       if (!req.user.nickname || req.user.nickname === 'UNQ') {
         await db.query(
-          "UPDATE usuarios SET nickname = 'UNQ' WHERE google_id = :google_id",
-          { google_id: req.user.google_id }
+          "UPDATE usuarios SET nickname = 'UNQ' WHERE google_id = ?",
+          [req.user.google_id]
         );
         console.log("Nickname definido como UNQ para:", req.user.google_id);
       }
@@ -227,18 +227,16 @@ app.post('/api/salvar-nickname', async (req, res) => {
     }
 
     const existingNickname = await db.query(
-      "SELECT COUNT(*) AS nickname_count FROM usuarios WHERE nickname = :nickname",
-      { nickname }
+      "SELECT COUNT(*) AS nickname_count FROM usuarios WHERE nickname = ?",
+      [nickname]
     );
-
-    if (existingNickname.rows[0].NICKNAME_COUNT > 0) {
+    if (existingNickname[0].nickname_count > 0) {
       return res.status(409).json({ success: false, message: "Nickname já está em uso." });
     }
 
-    const update = await db.query(
-      "UPDATE usuarios SET nickname = :nickname WHERE google_id = :google_id",
-      { nickname, google_id },
-      { autoCommit: true } // <<<< COMMIT
+    await db.query(
+      "UPDATE usuarios SET nickname = ? WHERE google_id = ?",
+      [nickname, google_id]
     );
 
     if (update.rowsAffected > 0) {
