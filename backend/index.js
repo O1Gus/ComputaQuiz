@@ -261,6 +261,7 @@ app.get('/', (req, res) => {
 // ----------------------------
 // START SERVER
 // ----------------------------
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+app.listen(3000, '0.0.0.0', () => console.log("Servidor rodando!"));
+//app.listen(port, () => {
+ // console.log(`Servidor rodando em http://localhost:${port}`);
+//});
