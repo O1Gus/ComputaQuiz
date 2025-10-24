@@ -57,9 +57,8 @@ passport.deserializeUser(async (google_id, done) => {
     );
     if (!r[0]) return done(null, null);
     const u = r[0];
-
-    // devolve já em minúsculas
-    done(null, { id_usuario: u.ID_USUARIO, google_id: u.GOOGLE_ID, nickname: u.NICKNAME });
+    // use os nomes corretos do SELECT
+    done(null, { id_usuario: u.id_usuario, google_id: u.google_id, nickname: u.nickname });
   } catch (e) {
     done(e);
   }
@@ -218,7 +217,7 @@ app.post('/api/salvar-nickname', async (req, res) => {
       return res.status(401).json({ success: false, message: "Usuário não autenticado." });
     }
 
-    const google_id = req.user.GOOGLE_ID || req.user.google_id;
+    const google_id = req.user.google_id || req.user.GOOGLE_ID;
     const { nickname } = req.body;
 
     if (!nickname || nickname.length !== 3) {
@@ -233,22 +232,22 @@ app.post('/api/salvar-nickname', async (req, res) => {
       return res.status(409).json({ success: false, message: "Nickname já está em uso." });
     }
 
-    await db.query(
+    const update = await db.query(
       "UPDATE usuarios SET nickname = ? WHERE google_id = ?",
       [nickname, google_id]
     );
 
-    if (update.rowsAffected > 0) {
-      res.json({ success: true, message: `Nickname '${nickname}' salvo com sucesso!` });
-    } else {
-      res.status(404).json({ success: false, message: "Usuário não encontrado." });
+    if (update.affectedRows > 0) {
+      return res.json({ success: true, message: `Nickname '${nickname}' salvo com sucesso!` });
     }
+    return res.status(404).json({ success: false, message: "Usuário não encontrado." });
 
   } catch (error) {
     console.error('Erro ao salvar nickname:', error);
     res.status(500).json({ success: false, message: "Erro interno do servidor ao salvar o nickname." });
   }
 });
+
 
 // ----------------------------
 // ROTA PADRÃO

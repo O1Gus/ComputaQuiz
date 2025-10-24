@@ -75,44 +75,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // Concatena os caracteres para formar o nickname
     const nickname = caractere1 + caractere2 + caractere3;
     let valor = nickname
-    localStorage.setItem("nickname", valor);
+    localStorage.setItem("nickname", nickname);//mudei aqui valor para nickname
     
     // **AQUI ESTÁ A CHAVE: Enviando o nickname para o back-end**
     try {
-        const response = await fetch('/api/salvar-nickname', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nickname }),
-            credentials: 'include' // <<< isso é obrigatório para sessão funcionar
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          alert(`Nickname '${nickname}' salvo com sucesso!`);
-          window.location.href = "/perguntas.html"; // redireciona automaticamente
-        } else {
-            alert(`Erro ao salvar nickname: ${data.message}`);
-        }
-        } catch (error) {
-            console.error('Erro de conexão:', error);
-            alert('Não foi possível conectar ao servidor. Tente novamente.');
+      const response = await fetch('/api/salvar-nickname', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nickname }),
+        credentials: 'include'
+      });
+      const data = await response.json();
       
-        }
+      if (data.success) {
+        alert(`Nickname '${nickname}' salvo com sucesso!`);
         window.location.href = "/perguntas.html";
-        break;
-       
-        
-
-      default:
-        e.preventDefault(); // Bloqueia outras teclas
-        break;
+      } else {
+        alert(`Erro ao salvar nickname: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Erro de conexão:', error);
+      alert('Não foi possível conectar ao servidor. Tente novamente.');
     }
-
-    e.preventDefault();
-  });
-
-  // Bloqueia uso do mouse
+    break;
+  }
+  e.preventDefault();
+});
+// Bloqueia uso do mouse
   document.addEventListener("mousedown", (e) => {
     e.preventDefault();
   });
