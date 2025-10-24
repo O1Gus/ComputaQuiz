@@ -81,14 +81,14 @@ passport.use(new GoogleStrategy(
       const email = profile.emails?.[0]?.value || null;
       const nome_completo = profile.displayName || null;
 
-      const result = await db.query( //mudei AQUI
+      const result = await db.query(
         "SELECT id_usuario, nickname, google_id FROM usuarios WHERE google_id = ?",
         [google_id]
       );
-      let user;
 
-      if (result.rows.length === 0) {
-        // gera um nickname_temp qualquer de 3 chars
+      let user;
+      if (result.length === 0) {
+        // Gera nickname temporário
         let nickname_temp = (google_id || "UNQ").slice(0,3).padEnd(3,'X');
 
         await db.query(
@@ -102,16 +102,15 @@ passport.use(new GoogleStrategy(
           [google_id]
         );
 
-        const r = inserted.rows[0];
-        // normaliza as chaves para minúsculas
-        user = { id_usuario: r.ID_USUARIO, google_id: r.GOOGLE_ID, nickname: r.NICKNAME };
+        const r = inserted[0];
+        user = { id_usuario: r.id_usuario, google_id: r.google_id, nickname: r.nickname };
 
       } else {
         const r = result[0];
-        user = { id_usuario: r.ID_USUARIO, google_id: r.GOOGLE_ID, nickname: r.NICKNAME };
+        user = { id_usuario: r.id_usuario, google_id: r.google_id, nickname: r.nickname };
       }
 
-      return done(null, user); // <<<< agora NUNCA é undefined
+      return done(null, user);
     } catch (err) {
       return done(err);
     }
