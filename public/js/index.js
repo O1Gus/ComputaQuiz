@@ -17,7 +17,7 @@ window.onload = () => {
 // -----------------------
 function abrirLoginGoogle() {
     window.location.href = "/auth/google";
-    window.location.href = "/cadastro.html";
+    //window.location.href = "/cadastro.html";
 }
 
 // -----------------------
