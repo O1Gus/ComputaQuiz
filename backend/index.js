@@ -31,10 +31,10 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: false, // ⬅️ Use 'false' para desenvolvimento local sem HTTPS
+    secure: true,   // com HTTPS
     httpOnly: true,
-    sameSite: 'lax', // ou 'none' se estiver usando HTTPS e tiver problemas de cross-site
-    maxAge: 24 * 60 * 60 * 1000
+    sameSite: 'lax',
+    maxAge: 24*60*60*1000
   }
 }));
 
@@ -57,7 +57,6 @@ passport.deserializeUser(async (google_id, done) => {
     );
     if (!r[0]) return done(null, null);
     const u = r[0];
-    // use os nomes corretos do SELECT
     done(null, { id_usuario: u.id_usuario, google_id: u.google_id, nickname: u.nickname });
   } catch (e) {
     done(e);
@@ -81,9 +80,14 @@ passport.use(new GoogleStrategy(
       const nome_completo = profile.displayName || null;
 
       const result = await db.query(
-        "SELECT id_usuario, nickname, google_id FROM usuarios WHERE google_id = ?",
-        [google_id]
+        "UPDATE usuarios SET nickname = ? WHERE google_id = ?",
+        [nickname, google_id]
       );
+      if (result.affectedRows > 0) {
+        res.json({ success: true, message: `Nickname '${nickname}' salvo com sucesso!` });
+      } else {
+        res.status(404).json({ success: false, message: "Usuário não encontrado." });
+      }
 
       let user;
       if (result.length === 0) {
